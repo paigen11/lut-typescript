@@ -1,0 +1,16 @@
+{
+  "devDependencies": {
+    "typescript": "^4.0.3"
+  },
+  "name": "lut-typescript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {},
+  "scripts": {
+    "start": "parcel index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Paige Niedringhaus",
+  "license": "ISC",
+  "description": ""
+}
