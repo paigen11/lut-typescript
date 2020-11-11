@@ -1,3 +1,5 @@
+import Job, { Person, Type, Type2 } from './interfaces';
+
 // boolean type
 const isOpen: boolean = false;
 
@@ -13,12 +15,6 @@ const list: number[] = [0, 1, 2, 3];
 // array of various types
 const me: [string, number, boolean] = ['Paige', 31, false];
 
-// enum options
-enum Job {
-  WebDev,
-  UX,
-  PM,
-}
 const job: Job = Job.WebDev;
 
 // the old fallback, catch all of type any
@@ -70,13 +66,6 @@ console.log('dog ', dog);
 dog = 'Kate';
 dog = undefined;
 
-// interfaces
-// essentially replaces named parameters or graphql inputs or types
-interface Person {
-  name: string;
-  age?: number; // ? optional param
-}
-
 const sayName = ({ name, age }: Person): string => {
   console.log(name);
   return name;
@@ -85,25 +74,10 @@ const sayName = ({ name, age }: Person): string => {
 sayName({ name: 'Paige', age: 31 });
 sayName({ age: 31, name: 'Paige' });
 
-// enums - allow us to define a set of named constants (like a select list in a dropdown, you can only choose one of those options)
-// this is a numeric enum
-enum Type {
-  Video, // 0
-  BlogPost, // 1
-  Quiz, // 2
-}
-
 const createContent = (contentType: Type) => {};
 createContent(Type.Quiz);
 
 console.log(Type.Quiz);
-
-// this is a string enum
-enum Type2 {
-  Video = 'VIDEO',
-  BlogPost = 'BLOG_POST',
-  Quiz = 'QUIZ',
-}
 
 const createContent2 = (contentType: Type2) => {};
 createContent2(Type2.Quiz);
@@ -129,3 +103,28 @@ class Team {
 const atlUnited = new Team('Atlanta United');
 atlUnited.score();
 atlUnited.teamName;
+
+// generic function with a generic type
+const outputInput = <T>(arg: T): T => {
+  return arg;
+};
+
+// hovering over this tells you what it implicitly becomes
+const output = outputInput('hi');
+outputInput(11);
+
+// duck typing (Typescript can tell if something is supposed to be the same as something else based on its types... if it looks like a duck and walks like a duck and talks like a duck)
+class Dancer implements Person {
+  name: string;
+  age?: number;
+}
+
+let ElNino: Person = new Dancer();
+
+const fake = {
+  name: 'Tiffany',
+  age: 32,
+};
+
+// TS does not care as long as fake has the same data shape as the interface of ElNino (the Person interface)
+ElNino = fake;
